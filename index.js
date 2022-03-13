@@ -1,11 +1,10 @@
 const { scrapeMain } = require("./scraper");
+const { connectDB } = require("./database/mongo");
 const {
-  connectDB,
-  addItems,
-  addItemsToHistory,
+  updateCurrentDeals,
+  getNewDeals,
   getCurrentDeals,
-} = require("./database/mongo");
-const { updateCurrentDeals, getNewDeals } = require("./processData");
+} = require("./processData");
 
 async function run() {
   await connectDB();

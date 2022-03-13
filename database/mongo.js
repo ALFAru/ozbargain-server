@@ -37,7 +37,7 @@ async function getDeal(id) {
   return await CurrentDeal.find({ _id: id });
 }
 
-async function getCurrentDeals() {
+async function getDeals() {
   return await CurrentDeal.find({});
 }
 
@@ -74,11 +74,11 @@ module.exports = {
   connectDB,
   addItems,
   addItemsToHistory,
-  getCurrentDeals,
   getDeal,
   deleteDeal,
   updateDeal,
   addDeal,
   addDealHistory,
   existInHistory,
+  getDeals,
 };

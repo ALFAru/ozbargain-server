@@ -1,6 +1,5 @@
 const {
-  getCurrentDeals,
-  getDeal,
+  getDeals,
   deleteDeal,
   updateDeal,
   addDeal,
@@ -45,7 +44,12 @@ function updateScoreTime(deal, lifeTime = 0) {
   return deal;
 }
 
+async function getCurrentDeals() {
+  return await getDeals();
+}
+
 module.exports = {
   updateCurrentDeals,
   getNewDeals,
+  getCurrentDeals,
 };
