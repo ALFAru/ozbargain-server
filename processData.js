@@ -11,21 +11,14 @@ const {
 async function getNewDeals(scrapedDeals, currentDeals) {
   scrapedDeals.forEach(async (sDeal) => {
     let currentDeal = currentDeals.find((cDeal) => cDeal._id === sDeal._id);
-    if (sDeal._id === 688269) {
-      console.log("cu deal: ", currentDeal);
-      console.log(" exist", await existInHistory(sDeal._id));
-    }
 
     if (!currentDeal) {
       let bool = await existInHistory(sDeal._id);
       if (!bool) {
-        console.log("Heeereeereeeee");
         let fixedDeal = updateScoreTime(sDeal);
         await addDeal(fixedDeal);
         await addDealHistory(fixedDeal);
       }
-
-      //{_id: 688269}
     }
   });
 }
@@ -40,7 +33,7 @@ async function updateCurrentDeals(scrapedDeals, currentDeals) {
       if (fixedDeal.lifeTime >= 61) await deleteDeal(fixedDeal._id);
       else {
         await updateDeal(fixedDeal);
-        //await addDealHistory(fixedDeal);
+        await addDealHistory(fixedDeal);
       }
     }
   });

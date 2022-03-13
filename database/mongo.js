@@ -5,9 +5,6 @@ const db_url = "mongodb://localhost/ozbargain";
 
 async function existInHistory(id) {
   const results = await HistoryDeal.find({ id: id });
-  if (id === 688269) {
-    console.log("length", results.length);
-  }
   if (results.length > 0) return true;
   else return false;
 }
@@ -30,7 +27,6 @@ async function updateDeal(deal) {
   await deleteDeal(deal._id);
   const newDeal = new CurrentDeal(deal);
   await newDeal.save();
-  //console.log(`Deal ${deal._id} updated`);
 }
 
 async function deleteDeal(id) {

@@ -54,8 +54,6 @@ async function scrapeMain() {
         deal.lifeTime = 0;
         deal.score = deal.comments + deal.likes;
 
-        //if (i === 1) console.log(deal);
-
         deals.push(deal);
       }
     });

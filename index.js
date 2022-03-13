@@ -14,9 +14,6 @@ async function run() {
   //
   await updateCurrentDeals(scrapedDeals, currentDeals);
   await getNewDeals(scrapedDeals, currentDeals);
-  // addNewDeals(scrapedDeals)
-  //addItems(scrapedDeals);
-  //addItemsToHistory(scrapedDeals);
 }
 
 run();
