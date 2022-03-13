@@ -1,11 +1,19 @@
 const { scrapeMain } = require("./scraper");
-const { connectDB, addItems, addItemsToHistory } = require("./database/mongo");
+const {
+  connectDB,
+  addItems,
+  addItemsToHistory,
+  getCurrentDeals,
+} = require("./database/mongo");
+const { updateCurrentDeals, getNewDeals } = require("./processData");
 
 async function run() {
   await connectDB();
-  const scrapedDeals = await scrapeMain(); //scrape
-  // Check if in current deals
-  // updateCurrentDeals(scrapedDeals)
+  let scrapedDeals = await scrapeMain(); //scrape
+  let currentDeals = await getCurrentDeals(); //current deals from db
+  //
+  await updateCurrentDeals(scrapedDeals, currentDeals);
+  await getNewDeals(scrapedDeals, currentDeals);
   // addNewDeals(scrapedDeals)
   //addItems(scrapedDeals);
   //addItemsToHistory(scrapedDeals);

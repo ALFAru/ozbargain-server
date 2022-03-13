@@ -51,6 +51,8 @@ async function scrapeMain() {
         let guests = $footer.next().next().text();
         guestsNum = parseInt(guests.replace(",", ""));
         deal.online = usersNum + guestsNum;
+        deal.lifeTime = 0;
+        deal.score = deal.comments + deal.likes;
 
         //if (i === 1) console.log(deal);
 

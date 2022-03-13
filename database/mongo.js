@@ -1,8 +1,49 @@
 const mongoose = require("mongoose");
 const CurrentDeal = require("./schemas/Deal");
 const HistoryDeal = require("./schemas/HistoryDeal");
-
 const db_url = "mongodb://localhost/ozbargain";
+
+async function existInHistory(id) {
+  const results = await HistoryDeal.find({ id: id });
+  if (id === 688269) {
+    console.log("length", results.length);
+  }
+  if (results.length > 0) return true;
+  else return false;
+}
+
+async function addDealHistory(deal) {
+  let dealCopy = { id: deal._id, ...deal };
+  delete dealCopy._id;
+  const newDeal = new HistoryDeal(dealCopy);
+  await newDeal.save();
+  console.log("Added History", deal._id);
+}
+
+async function addDeal(deal) {
+  const newDeal = new CurrentDeal(deal);
+  await newDeal.save();
+  console.log("New deal added", deal._id);
+}
+
+async function updateDeal(deal) {
+  await deleteDeal(deal._id);
+  const newDeal = new CurrentDeal(deal);
+  await newDeal.save();
+  //console.log(`Deal ${deal._id} updated`);
+}
+
+async function deleteDeal(id) {
+  await CurrentDeal.deleteOne({ _id: id });
+}
+
+async function getDeal(id) {
+  return await CurrentDeal.find({ _id: id });
+}
+
+async function getCurrentDeals() {
+  return await CurrentDeal.find({});
+}
 
 async function addItemsToHistory(deals) {
   deals.forEach(async (deal) => {
@@ -37,4 +78,11 @@ module.exports = {
   connectDB,
   addItems,
   addItemsToHistory,
+  getCurrentDeals,
+  getDeal,
+  deleteDeal,
+  updateDeal,
+  addDeal,
+  addDealHistory,
+  existInHistory,
 };
