@@ -1,2 +1,2 @@
 # ozbargain-server
- Ozbargain server
+ Server for Ozbargain Hunter project
